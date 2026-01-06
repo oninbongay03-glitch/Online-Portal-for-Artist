@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Footer(){
     return(
-        <footer className="z-10 max-w-screen-2xl relative mx-auto flex justify-between mt-[10em]">
+        <footer className="z-10 max-w-screen-2xl inset-0 relative mx-auto flex justify-between">
             <div className="z-10">
                 <Logo/>
                 <div>
@@ -42,8 +42,6 @@ export default function Footer(){
                     </div>
                 </div>
             </div>
-
-            <div className="z-0 absolute bottom-0 left-0 w-full h-50 bg-primary"></div>
         </footer>
     );
 };

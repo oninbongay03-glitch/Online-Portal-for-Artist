@@ -1,12 +1,13 @@
 "use client"
-import classNames from 'clsx';
+
 import {LOGGED_IN_USER_ID} from "@/lib/auth"
 import { MdOutlineMail } from "react-icons/md";
 import { GoPlusCircle } from "react-icons/go";
-import { useState } from "react";
 import CommissionForm from "../commission/CommissionForm";
 import DarkBlur from "../ui/DarkBlur";
 import Menu from './Menu';
+import { usePopup } from '@/hooks/usePopup';
+import ModalPortal from '../shared/ModalPortal';
 
 interface NavLinksProps {
     userId: string;
@@ -14,9 +15,13 @@ interface NavLinksProps {
 
 const ButtonSubmission = ({userId}: NavLinksProps) => {
  const isOwner = LOGGED_IN_USER_ID == userId;
- const [commissionIsActive, setCommissionIsActive] = useState(true);
 
- console.log("commission " + commissionIsActive)
+ const commissionPopup = usePopup({
+    closeOnEsc: true,
+    closeOnOutsideClick: true,
+    closeOnRouteChange: true,
+  });
+
   return (
     <div>
         {
@@ -29,7 +34,7 @@ const ButtonSubmission = ({userId}: NavLinksProps) => {
                 </button>
 
                 <button 
-                    onClick={() => setCommissionIsActive(i => !i)}
+                    onClick={commissionPopup.open}
                     className="flex bg-green-400 px-4 py-2 text-nowrap items-center text-black rounded-md gap-2 cursor-pointer hover:opacity-80 transition duration-200 ease-in-out hover:scale-102">
                     <MdOutlineMail /> 
                     <span>Send Commission</span>
@@ -40,19 +45,20 @@ const ButtonSubmission = ({userId}: NavLinksProps) => {
         {
         }
 
-        <div className={classNames('fixed -translate-y-1/2 transition duration-200 ease-in-out -translate-x-1/2 left-1/2 top-1/2 inset-0 z-50', {
-            "hidden -mt-4 opacity-0" : commissionIsActive,
-            "visible mt-0 opacity-100" : !commissionIsActive
-        })}>
-            <CommissionForm func={setCommissionIsActive}/>
-        </div>
-        
+        {commissionPopup.isOpen && (
+            <>
+            {/* Modal */}
+            <ModalPortal>
+                <div ref={commissionPopup.ref}>
+                    <CommissionForm func={commissionPopup.close} userId={userId} />
+                </div>
 
-        <div className={classNames('fixed inset-0 z-40', {
-             "hidden -mt-4" : commissionIsActive,
-        })}>
-            <DarkBlur />
-        </div>
+                {/* Backdrop */}
+                    <DarkBlur />
+            </ModalPortal>
+
+            </>
+        )}
     </div>
   )
 }

@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { TbFolderUp } from "react-icons/tb";
+import {notify} from "@/utils/toastHelper";
 import { MdImage } from "react-icons/md";
-
 
 interface ImgRefProps {
   images: { file: File; url: string }[];
   setImages: React.Dispatch<React.SetStateAction<{ file: File; url: string }[]>>;
   goNext: React.Dispatch<React.SetStateAction<number>>;
-  func: React.Dispatch<React.SetStateAction<boolean>>
+  func: (value: boolean) => void
 }
 
 
@@ -21,7 +21,6 @@ const ImgRef = ({
  
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const files = e.target.files; //filelist not an array
     if (!files) return;
 
@@ -30,7 +29,7 @@ const ImgRef = ({
 
     for (let file of fileArray) {
       if (images.length >= 3) {
-        alert("You can only upload 3 images");
+        notify("You can only upload 3 images", 'error');
         return;
       }
 
@@ -39,7 +38,7 @@ const ImgRef = ({
       );
 
       if (duplicate) {
-        alert("This image is already uploaded");
+        notify("This image is already uploaded", 'error');
         return;
       }
 
@@ -58,14 +57,15 @@ const ImgRef = ({
 
   const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
+    if(images.length == 0 ){
+      notify("Select at least 1 image to continue", 'error')
+      return;
+    }
+
     goNext(1)
   }
-
-//   useEffect(() => {
-//     console.log(images)
-//   }, [images])
   return (
-    <div className="flex flex-col text-center rounded-md w-130 mx-auto p-8 bg-secondary">
+    <div className="bg-secondary rounded-md p-6 w-full max-w-xl mx-auto">
       <h4 className="text-left font-bold text-2xl">Upload a new reference</h4>
 
       <p className="text-left text-sm opacity-50 mt-2">
@@ -78,7 +78,7 @@ const ImgRef = ({
         className="mt-5 p-4 py-6 rounded-xl">
         {/* Upload Section */}
         <div className="bg-primary">
-          <label className="h-full cursor-pointer w-full p-4" htmlFor="img-reference">
+          <label className="h-full cursor-pointer w-full p-4 text-center" htmlFor="img-reference">
             <TbFolderUp className="text-7xl mx-auto opacity-50" />
             <p className="text-md mt-4 font-bold">Click to upload or drag and drop</p>
             <p className="opacity-50 font-400 text-sm mt-4">Maximum file size 5mb</p>
@@ -98,7 +98,7 @@ const ImgRef = ({
           {[0, 1, 2].map((index) => (
             <div
               key={index}
-              className="relative bg-gray-700 h-29 w-30 text-4xl flex justify-center items-center rounded-md opacity-80 hover:opacity-100 overflow-hidden group"
+              className="relative bg-primary h-29 w-30 text-4xl flex justify-center items-center rounded-md opacity-80 hover:opacity-100 overflow-hidden group"
             >
 
               {images[index] && (
@@ -125,10 +125,10 @@ const ImgRef = ({
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-between mt-8">
+        <div className="flex flex-col sm:flex-row gap-4 mt-8">
           <button 
             type="button"
-            onClick={() => func(true)}
+            onClick={() => {func(true)}}
             className="text-sm p-2 border w-35  rounded-sm transition hover:opacity-80 cursor-pointer">Cancel</button>
          
           <button 
@@ -138,6 +138,7 @@ const ImgRef = ({
           </button>
         </div>
       </form>
+
     </div>
   );
 };

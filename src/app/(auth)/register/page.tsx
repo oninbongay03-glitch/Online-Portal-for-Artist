@@ -10,7 +10,7 @@ export default function LoginPage() {
     <div className="relative shadow-xl min-h-[100dvh] w-[100vw] border-white border-2 shadow-white flex flex-col justify-center items-center h-[100dvh] bg-[url('https://static.vecteezy.com/system/resources/previews/006/595/713/non_2x/silhouettes-of-panoramic-mountains-view-landscape-vector.jpg')] bg-cover bg-center h-64 w-full)">
       <div className="z-20 flex justify-center  h-[40em] rounded-md overflow-hidden">
         <div
-          className="hidden md:block w-1/2 bg-cover p-8 pt-24 leading-6"
+          className="hidden md:block w-1/2 bg-cover p-8 pt-24 leading-6 text-white"
           style={{ backgroundImage: `url(form-background.jpg)` }}
         >
           <h1 className="text-5xl text-start font-bold leading-[1.2em]">

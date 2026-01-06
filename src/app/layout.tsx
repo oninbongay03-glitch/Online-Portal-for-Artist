@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import LayoutWrapper from "@/app/components/LayoutWrapper";
 import { ReactNode } from "react";
+import Providers from "@/app/components/Providers";
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: "ArtistryHub",
@@ -12,7 +13,10 @@ export default function RootLayout({ children }: {children: ReactNode}) {
   return (
     <html lang="en">
       <body className="antialiased">
-        {children}
+        <Providers>
+          {children}
+          <Toaster position="top-center" />
+        </Providers>
       </body>
     </html>
   );

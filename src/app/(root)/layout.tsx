@@ -5,16 +5,17 @@ import Footer from '../components/layout/Footer';
 
 const layout = ({children}: {children: React.ReactNode}) => {
   return (
-    <div className='relative min-h-screen'>
+    <div className='flex flex-col min-h-screen'>
       <Header />
-      <main className=''>
+      
+      <main className='flex-grow'>
         {children}
       </main>
-      <Footer />
-     
-
-      {/* <div className='bg-secondary absolute -bottom-10 w-[100vw] h-60'>
-      </div> */}
+      
+      <div className='bg-primary mt-20'>
+        <Footer />
+      </div>
+      
     </div>
   )
 }

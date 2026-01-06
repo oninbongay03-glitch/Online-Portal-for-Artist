@@ -4,27 +4,35 @@ import { CardFeatured } from "./CardFeatured";
 import { FaPaperclip } from "react-icons/fa";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
+import {artwork} from "@/types/User"
+import { artwork } from "@/types/User";
 
-export function Sidebar(){
+export function Sidebar(art: artwork){
+    console.log("hey hey souldd", art)
     return(
         <div>
-            <div className="w-full mt-5 p-4 rounded-md border-1 border-primary-line flex flex-col gap-4 bg-primary mb-10">
-                <button className="bg-secondary p-2 rounded-full cursor-pointer">Buy for $10</button>
-                <div className="flex items-center gap-2">
-                    <FaPaperclip />
-                    <p>1 attached file</p>
-                </div>
+            {
+                art?.status == "For Sale" && 
+                    <div className="w-full mt-5 p-4 rounded-md border-1 border-primary-line flex flex-col gap-4 bg-primary mb-10">
+                        <button className="p-2 rounded-full cursor-pointer bg-green-500">Buy for $10</button>
+                        <div className="flex items-center gap-2">
+                            <FaPaperclip />
+                            <p>1 attached file</p>
+                        </div>
 
-                <div className="flex items-center gap-2">
-                   <MdProductionQuantityLimits />
-                    <p>310 Available stocks</p>
-                </div>
+                        <div className="flex items-center gap-2">
+                        <MdProductionQuantityLimits />
+                            <p>310 Available stocks</p>
+                        </div>
 
-                <div className="flex items-center gap-2">
-                   <HiOutlineComputerDesktop />
-                    <p>Digital Art</p>
-                </div>
-            </div>
+                        <div className="flex items-center gap-2">
+                        <HiOutlineComputerDesktop />
+                            <p>Digital Art</p>
+                        </div>
+                    </div>
+            }
+            
+
             <div className="flex justify-between items-center">
                 <h3>More arts by <Link href="#" className="font-bold">SamDoesArt</Link></h3>
                 <IoIosArrowForward />
@@ -46,12 +54,12 @@ export function Sidebar(){
             </div>
 
             <div className="grid grid-cols-2 gap-2 ">
-              <CardFeatured />
-              <CardFeatured />
-              <CardFeatured />
-              <CardFeatured />
-              <CardFeatured />
-              <CardFeatured />
+                <CardFeatured />
+                <CardFeatured />
+                <CardFeatured />
+                <CardFeatured />
+                <CardFeatured />
+                <CardFeatured />
             </div>
       
         </div>

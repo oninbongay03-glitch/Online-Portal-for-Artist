@@ -1,21 +1,17 @@
-import { FaRegStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegCommentAlt } from "react-icons/fa";
 import Comments from '@/app/components/shared/Comments';
 import ProfileIcon from '@/app/components/ui/ProfileIcon';
 import { Sidebar } from '@/app/components/preview/Sidebar';
-import { IoIosArrowForward } from "react-icons/io";
-import { MdKeyboardArrowLeft } from "react-icons/md";
 
 import artwork from "@/data/artwork.json";
 import useProfile from "@/data/user_profile.json"
 import GoBackBtn from "@/app/components/ui/GoBackBtn";
 import comments from "@/data/comments.json"
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Image from "next/image";
 
 import Menu from "@/app/components/preview/Menu";
-import CollectionModal from "@/app/components/ui/CollectionModal";
-import { LuPlus } from "react-icons/lu";
 
 
 const ArtPreview = async({ params }: { params: Promise<{ id: string }>}) => {
@@ -24,11 +20,14 @@ const ArtPreview = async({ params }: { params: Promise<{ id: string }>}) => {
   const user = useProfile.find((u) => u.id === art?.user_profile_id);
   const comment = comments.filter((u) => u.artworkId == art?.artwork_id)
   
+  console.log(art);
   return (
-    <div className='px-10 -mt-10 lg:flex gap-18 '>
+    <div className='px-4 md:px-10 mt-10 lg:flex gap-18 '>
       <div className='md:w-full relative'>
         <div className='w-full h-[50em] bg-primary flex items-center justify-center'>
             <img 
+              width={200}
+              height={200}
               src={art?.art_file}
               alt={art?.artwork_title}
               className='object-contain h-full w-full'  
@@ -107,17 +106,15 @@ const ArtPreview = async({ params }: { params: Promise<{ id: string }>}) => {
           </div>
         </div>
 
-          <IoIosArrowForward className='absolute top-[9em] text-4xl -right-10 opacity-50 hover:opacity-100 transition ease-in-out duration-200 cursor-pointer'/>
-          <MdKeyboardArrowLeft className='absolute top-[9em] text-4xl -left-10 opacity-50 hover:opacity-100 transition ease-in-out duration-200 cursor-pointer'/>
+          {/* <IoIosArrowForward className='absolute top-[9em] text-4xl -right-10 opacity-50 hover:opacity-100 transition ease-in-out duration-200 cursor-pointer'/>
+          <MdKeyboardArrowLeft className='absolute top-[9em] text-4xl -left-10 opacity-50 hover:opacity-100 transition ease-in-out duration-200 cursor-pointer'/> */}
       </div>
 
       <div className='lg:w-80 ml-auto'>
-        <Sidebar />
+        <Sidebar {...art}/>
       </div>
 
         <GoBackBtn/>
-
- 
     </div>
   )
 }

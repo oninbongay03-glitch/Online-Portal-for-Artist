@@ -3,9 +3,7 @@ import clsx from 'clsx';
 
 import React from "react";
 import ArtList from "../shared/ArtList";
-import Suggestion from "./Suggestion";
 import { BsSearch } from 'react-icons/bs';
-import FilterIcon from "../ui/FilterIcon";
 import { ImSpinner2 } from "react-icons/im";
 import artworks from "@/data/artwork.json"
 import Link from "next/link";
@@ -21,7 +19,7 @@ const ExploreLayout = () => {
           <input 
             type="text" 
             placeholder='Search' 
-            className='pl-15 h-[4em] text-white w-full bg-primary rounded-md'
+            className='pl-15 h-[4em] w-full bg-primary rounded-md'
           />
           <BsSearch className='absolute top-4 left-5'/>
         </div>
@@ -29,11 +27,9 @@ const ExploreLayout = () => {
         <SearchHeader />
       </div>
 
-     
-        
       <div className="w-full mx-auto
         columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 min-2xl:columns-7
-        gap-4 mt-30">
+        gap-4 mt-40">
         {artworks.map((art) => (
           <Link href={`/explore/${art.artwork_id}`} key={art.artwork_id} className="break-inside-avoid">
             <ArtList art={art} />

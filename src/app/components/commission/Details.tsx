@@ -1,14 +1,24 @@
+"use client";
+
+import Image from "next/image";
+import React from "react";
+import { CommissionFormData } from "@/types/commission";
+
 interface DetailsProps {
-  formData: any;
-  setFormData: any;
+  formData: CommissionFormData;
   tags: string[];
   inputValue: string;
   setInputValue: (v: string) => void;
-  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleTag: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   removeTag: (tag: string) => void;
-  handleChange: any;
+  handleChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => void;
   submit: () => void;
   goBack: () => void;
+  images: { file: File; url: string }[];
 }
 
 const Details = ({
@@ -16,11 +26,12 @@ const Details = ({
   tags,
   inputValue,
   setInputValue,
-  handleKeyDown,
+  handleTag,
   removeTag,
   handleChange,
   submit,
   goBack,
+  images,
 }: DetailsProps) => {
   return (
     <form
@@ -28,144 +39,163 @@ const Details = ({
         e.preventDefault();
         submit();
       }}
-      className=" bg-secondary rounded-md flex justify-between mx-auto p-6 gap-5 text-base"
+      className="flex flex-col gap-4"
     >
-      {/* LEFT FORM */}
-      <div className="flex flex-col gap-6 w-[70%]">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="title" className="text-md font-semibold">
-            Title of your arts
-          </label>
-          <input
-            name="title"
-            value={formData.title}
-            required
-            onChange={handleChange}
-            className="border border-primary-line rounded-sm w-full p-3 bg-secondary"
-            type="text"
-            id="title"
-            placeholder="ex: Illustrations"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label htmlFor="description" className="text-md font-semibold">
-            Description
-          </label>
-          <textarea
-            name="description"
-            required
-            value={formData.description}
-            onChange={handleChange}
-            className="border border-primary-line rounded-sm w-full p-3 bg-secondary h-32"
-            id="description"
-            placeholder="Your assets description"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="artType" className="text-md font-semibold">
-              Art Type
-            </label>
-            <select
-              value={formData.artType}
-              onChange={handleChange}
-              id="artType"
-              name="artType"
-              required
-              className="border border-primary-line rounded-sm w-full p-3 bg-secondary"
-            >
-              <option value="Digital Art">Digital Arts</option>
-              <option value="Physical Art">Physical Arts</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="date" className="text-md font-semibold">
-              Deadline
-            </label>
+      <div className="bg-primary rounded-md md:flex gap-6 p-6">
+        {/* LEFT FORM */}
+        <div className="flex flex-col gap-6 md:w-[70%]">
+          {/* Title */}
+          <div>
+            <label className="font-semibold">Title</label>
             <input
-              name="date"
-              id="date"
+              name="title"
+              value={formData.title}
               onChange={handleChange}
               required
-              className="border border-primary-line rounded-sm w-full p-3 bg-secondary"
-              type="date"
+              className="w-full mt-1 p-3 bg-secondary border border-primary-line rounded-sm"
+              placeholder="e.g. Illustration, character design, etc.."
             />
           </div>
-        </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="tags" className="text-md font-semibold">
-            Tags
-          </label>
-          <div className="flex gap-2 flex-wrap bg-secondary border border-primary-line rounded-sm p-2">
-            {tags.map((item) => (
-              <div
-                key={item}
-                className="px-3 py-1 bg-green-700 rounded text-sm group"
+          {/* Description */}
+          <div>
+            <label className="font-semibold">Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              placeholder="Your assets descriptions"
+              rows={4}
+              className="w-full mt-1 p-3 bg-secondary border border-primary-line rounded-sm resize-none"
+            />
+          </div>
+
+          {/* Art Type & Deadline */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="font-semibold">Art Type</label>
+              <select
+                name="artType"
+                value={formData.artType}
+                onChange={handleChange}
+                className="w-full mt-1 p-3 bg-secondary border border-primary-line rounded-sm"
               >
-                <span className="">{item}</span>
-                <button
-                  onClick={() => removeTag(item)}
-                  className="opacity-0 group-hover:opacity-100 transition cursor-pointer ml-1 text-white"
-                >
-                  X
-                </button>
-              </div>
-            ))}
+                <option value="Digital Art">Digital Art</option>
+                <option value="Physical Art">Physical Art</option>
+              </select>
+            </div>
 
+            <div>
+              <label className="font-semibold">Deadline</label>
+              <input
+                type="date"
+                name="deadline"
+                value={formData.deadline}
+                onChange={handleChange}
+                required
+                className="w-full mt-1 p-3 bg-secondary border border-primary-line rounded-sm"
+              />
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div>
+            <label className="font-semibold">Tags</label>
+            <div className="flex flex-wrap gap-2 p-2 border border-primary-line rounded-sm bg-secondary mt-1">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="flex items-center gap-1 bg-green-700 text-white px-3 py-1 rounded text-sm"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="ml-1 text-xs"
+                  >
+                    ✕
+                  </button>
+                </span>
+              ))}
+              <input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleTag}
+                placeholder="Press Enter to add"
+                className="bg-transparent outline-none flex-1 text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Budget */}
+          <div>
+            <label className="font-semibold">Budget</label>
             <input
-              name="tags"
-              className="bg-secondary outline-none flex-1"
-              placeholder="Add tags"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e)}
+              name="budget"
+              value={formData.budget}
+              onChange={handleChange}
+              required
+              type="number"
+              placeholder="₱500"
+              className="w-full mt-1 p-3 bg-secondary border border-primary-line rounded-sm"
             />
           </div>
         </div>
 
-        <div className="flex justify-between ">
-          <button 
-            type="button"
-            onClick={goBack}
-            className="text-sm p-2 border rounded-sm w-32 hover:opacity-80 transition cursor-pointer">
-            Cancel
-          </button>
+        {/* RIGHT IMAGE PREVIEW */}
+        <div className="md:w-[30%] flex flex-col gap-3">
+          <p className="text-sm font-semibold opacity-70">
+            Image Preview ({images.length})
+          </p>
 
-          <button
-            type="submit"
-            className="text-sm cursor-pointer hover:opacity-80 transition p-2 font-semibold border rounded-sm w-32 bg-white text-black"
-          >
-            Review
-          </button>
+          {images.length > 0 ? (
+            <>
+              <div className="relative aspect-square w-full">
+                <Image
+                  src={images[0].url}
+                  alt="main-preview"
+                  fill
+                  className="object-cover rounded-md border border-primary-line"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                {images.slice(1).map((img, i) => (
+                  <div key={i} className="relative aspect-square">
+                    <Image
+                      src={img.url}
+                      alt={`thumb-${i}`}
+                      fill
+                      className="object-cover rounded-md border border-primary-line"
+                    />
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="aspect-square border border-dashed border-primary-line flex items-center justify-center text-xs opacity-50">
+              No images uploaded
+            </div>
+          )}
         </div>
       </div>
 
-      {/* RIGHT PREVIEW */}
-      <div className="flex flex-col items-center w-[30%] gap-3 justify-start">
-        {/* Main image */}
-        <img
-          src="https://www.bing.com/th/id/OIP.V37pvUKTsUc4tWkJ1eyh7gHaHW?w=199&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-          className="rounded-md w-full aspect-square object-cover"
-          alt="preview"
-        />
-
-        {/* Thumbnails */}
-        <div className="flex gap-3 w-[70%] mr-auto">
-          <img
-            src="https://www.bing.com/th/id/OIP.V37pvUKTsUc4tWkJ1eyh7gHaHW?w=199&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-            className="rounded-md w-[50%] aspect-square object-cover"
-            alt="thumb1"
-          />
-          <img
-            src="https://www.bing.com/th/id/OIP.V37pvUKTsUc4tWkJ1eyh7gHaHW?w=199&h=211&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2"
-            className="rounded-md w-1/2 aspect-square object-cover"
-            alt="thumb2"
-          />
-        </div>
+      {/* ACTIONS */}
+      <div className="flex justify-between">
+        <button
+          type="button"
+          onClick={goBack}
+          className="border px-6 py-2 rounded-md text-sm cursor-pointer hover:opacity-80 transition-all"
+        >
+          Back
+        </button>
+        <button
+          type="submit"
+          className="bg-white text-black px-6 py-2 rounded-md text-sm font-semibold cursor-pointer hover:opacity-80 transition-all"
+        >
+          Review
+        </button>
       </div>
     </form>
   );

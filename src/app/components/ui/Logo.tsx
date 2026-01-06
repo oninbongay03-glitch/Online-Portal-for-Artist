@@ -1,12 +1,17 @@
 import Link from "next/link"
+import logo from "../../logo-light.png"
+import Image from "next/image"
 
 export default function Logo(){
     return (
         <Link href="/">
-            <div className="flex items-center">
-                <img className="w-12" src="/Logo-icon.png" alt="logo" />
-                <h1 className="font-bold" >ArtistryHub</h1>
-            </div>
+            <Image 
+                width={120}
+                height={120}
+                alt="logo"
+                src={logo}
+                className="w-25"
+            />
         </Link>
     )
 }

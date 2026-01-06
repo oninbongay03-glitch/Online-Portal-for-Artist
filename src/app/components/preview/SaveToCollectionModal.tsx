@@ -33,12 +33,12 @@ const SaveToCollectionModal = ({
         
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className="text-lg font-semibold ">
             Save to Collection
           </h2>
           <button
             onClick={onClose}
-            className="text-zinc-400 hover:text-white cursor-pointer"
+            className="text-zinc-400  cursor-pointer"
           >
             ✕
           </button>
@@ -64,7 +64,7 @@ const SaveToCollectionModal = ({
 
               {/* Info */}
               <div className="flex-1 text-left">
-                <p className="text-sm font-medium text-white">
+                <p className="text-sm font-medium ">
                   {collection.name}
                 </p>
                 <p className="text-xs text-zinc-400">

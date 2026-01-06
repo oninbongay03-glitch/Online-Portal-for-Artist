@@ -1,46 +1,66 @@
 @import "tailwindcss";
-/* @plugin "daisyui"; */
-/* Theme Variants */
 
+/* ============================= */
+/* Base Theme Tokens (LIGHT)     */
+/* ============================= */
 :root {
-  --background: #101828 !important;
-  --foreground: #fcf5f5 !important;
+  --background: #ffffff;
+  --foreground: #000000;
 
-  --primary: #171F2F !important;
-  --secondary: #1D2939 !important;
-  --tertiary: #21272B !important;
+  --primary: #F2F2F2;
+  --secondary: #D9D9D9;
+  --tertiary: #D9D9D9;
 
-  --primary-line: #2b394a !important;
-  --primary-blue: #1E86D8;
+  --primary-line: #e5e7eb;
+  --primary-blue: #1e86d8;
+  --primary-border: rgba(0, 0, 0, 0.15);
 
-  --primary-border: rgba(255,255,255,0.3);
+  --text-active: #2563eb;
+  --bg-active: #e0e7ff;
+}
 
-    /* dashboard */
+/* ============================= */
+/* Dark Mode Overrides           */
+/* ============================= */
+.dark {
+  --background: #101828;
+  --foreground: #ffffff;
+
+  --primary: #171F2F;
+  --secondary: #1D2939;
+  --tertiary: #21272b;
+
+  --primary-line: #2b394a;
+  --primary-border: rgba(255, 255, 255, 0.3);
+
   --text-active: #7895ff;
   --bg-active: #172142;
 }
 
+/* ============================= */
+/* System Preference Fallback    */
+/* (ONLY when no class is set)   */
+/* ============================= */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --background: #06070d;
+    --foreground: #ffffff;
 
-.dark {
-  --background: #06070D;
-  --foreground: #ffffff;
+    --primary: #1d1e22;
+    --secondary: #343438;
+    --tertiary: #21272b;
 
-  --primary: #1D1E22;
-  --secondary: #343438;
+    --primary-line: #2b394a;
+    --primary-border: rgba(255, 255, 255, 0.3);
+
+    --text-active: #7895ff;
+    --bg-active: #172142;
+  }
 }
 
-
-.light {
-  --background: #FFFFFF;
-  --foreground: #000000;
-
-  --primary: #F2F2F2;
-  --secondary: #D4F6FF;
-}
-
-
-
-/* Global Theme Tokens */
+/* ============================= */
+/* Tailwind Theme Mapping        */
+/* ============================= */
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -54,71 +74,16 @@
   --color-bg-active: var(--bg-active);
 }
 
-/* Custom Utilities */
-@layer utilities {
-  .bg-gradient-primary {
-    background-image: linear-gradient(
-      90deg,
-      #6d449f 0%,
-      #417a9e 50%,
-      #3896e0 93%
-    );
-  }
-
-  .border-gradient-primary {
-    /* set width + style */
-    border: 2px solid transparent;
-    /* gradient for the border */
-    border-image-source: linear-gradient(
-      90deg,
-      #6d449f 0%,
-      #417a9e 50%,
-      #3896e0 93%
-    );
-    /* required to actually use the image as the border */
-    border-image-slice: 1;
-  }
-
-  .border-b-gradient-primary {
-    /* set width + style */
-    border-bottom: 3px solid transparent;
-    /* gradient for the border */
-    border-image-source: linear-gradient(
-      90deg,
-      #6d449f 0%,
-      #417a9e 50%,
-      #3896e0 93%
-    );
-    /* required to actually use the image as the border */
-    border-image-slice: 1;
-  }
-}
-
-/* Example of scoped theme */
+/* ============================= */
+/* Base Styles                   */
+/* ============================= */
 body {
-  @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-  }
-
-  background-image: url(https://wallpaperaccess.com/full/340452.png);
-}
-
-/* Dark mode override */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* Base styles */
-body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
 }
+
 
 h2 {
   font-weight: bold;
@@ -267,7 +232,7 @@ ul {
   box-shadow: 0px 0px 5px 3px rgba(137, 246, 91, 0.322);
 }
 
-.commission-card{
+.commission-card.dark{
   background-image: linear-gradient(to top, #1d2939, #1b2637, #1a2434, #182132, #171f2f);
   box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.156);
   transition: all 200ms ease-in-out;

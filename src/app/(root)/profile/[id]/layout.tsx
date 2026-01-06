@@ -6,7 +6,6 @@ import Image from "next/image";
 import {LOGGED_IN_USER_ID} from "@/lib/auth"
 import { MdDownload } from "react-icons/md";
 import ButtonSubmission from "@/app/components/profile/ButtonSubmission";
-import Menu from "@/app/components/profile/Menu";
 
 interface LayoutProps {
   children: ReactNode;
@@ -37,7 +36,7 @@ export default async function Layout({ children, params }: LayoutProps) {
         {
           isOwner &&
             <div>
-              <label htmlFor="banner" className="absolute inset-0 opacity-50 hover:opacity-100 transition duration-200 ease-in-out h-50 cursor-pointer z-10 flex flex-col items-center justify-center pt-20">
+              <label htmlFor="banner" className="text-white absolute inset-0 opacity-50 hover:opacity-100 transition duration-200 ease-in-out h-50 cursor-pointer z-10 flex flex-col items-center justify-center pt-20">
                 <div className="bg-white text-green-500 p-4 rounded-full text-4xl">
                   <MdDownload/>
                 </div>
@@ -54,7 +53,7 @@ export default async function Layout({ children, params }: LayoutProps) {
 
 
         
-        <div className="flex gap-4 pt-50 items-center px-10 pl-12 z-10 pb-5 banner">
+        <div className="flex gap-4 pt-50 items-center px-10 pl-12 z-10 pb-5 banner text-white" >
           <div className="h-25 w-25 bg-primary rounded-full overflow-hidden border-2 border-green-600">
             <img 
               height={80}

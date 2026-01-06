@@ -2,7 +2,7 @@
 import Link from "next/link"
 
 interface Props {
-  id: string | undefined,
+  id?: string | undefined,
   profile: string | undefined
 }
 

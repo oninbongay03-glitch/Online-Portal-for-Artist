@@ -1,16 +1,19 @@
 // src/app/login/page.tsx
+'use client'
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { TfiEmail } from "react-icons/tfi";
 import { CiLock } from "react-icons/ci";
 import Logo from "@/app/components/ui/Logo";
+import {login} from "@/lib/actions/auth"
+
 
 
 export default function LoginPage() {
   return (
     <div className="w-full relative shadow-xl min-h-[100dvh] border-white border-2 shadow-white flex flex-col justify-center items-center h-[100dvh] bg-[url('https://static.vecteezy.com/system/resources/previews/006/595/713/non_2x/silhouettes-of-panoramic-mountains-view-landscape-vector.jpg')] bg-cover bg-center h-64 w-full)">
         <div className="z-20 flex justify-center  h-[40em] rounded-md overflow-hidden">
-          <div className="hidden md:block w-1/2 bg-cover p-8 pt-24 leading-6" style={{backgroundImage: `url(form-background.jpg)`}}>
+          <div className="hidden text-white md:block w-1/2 bg-cover p-8 pt-24 leading-6" style={{backgroundImage: `url(form-background.jpg)`}}>
             <h1 className="text-5xl text-start font-bold leading-[1.2em]">JOIN THE <br />FUTURE OF <br /> ART & <br />CREATIVITY</h1>
             <p className="text-lg text-start mt-8 leading-[2em] pr-8">Showcase your talent, connect with fellow <br /> artist, and open door to opportunities. <br /> Whether you're a traditional or digital artist, <br />share your work, gain appreciation, and build meaningful collaboration.</p>
           </div>
@@ -18,7 +21,7 @@ export default function LoginPage() {
           <div className="w-[90dvw] md:w-1/2 bg-white py-10">
             <form className="flex flex-col gap-5 p-10">
               <h3 className="text-3xl font-bold text-center text-black">Welcome back</h3>
-              <button className="border border-cyan-500 p-5 text-black rounded-xl flex items-center justify-center gap-3">
+              <button onClick={() => login()} className="border border-cyan-500 p-5 text-black rounded-xl flex items-center justify-center gap-3">
                 <FcGoogle />
                 <p>Continue with Google</p>
               </button>

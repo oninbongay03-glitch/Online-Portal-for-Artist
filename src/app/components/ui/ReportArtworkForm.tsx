@@ -46,12 +46,12 @@ const ReportArtworkModal = ({
         
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-white">
+          <h2 className="text-xl font-semibold ">
             Report Artwork
           </h2>
           <button
             onClick={onClose}
-            className="text-zinc-400 hover:text-white"
+            className="text-zinc-400 "
           >
             ✕
           </button>
@@ -62,14 +62,14 @@ const ReportArtworkModal = ({
           
           {/* Reason */}
           <div>
-            <label className="mb-1 block text-sm text-zinc-300">
+            <label className="mb-1 block text-sm ">
               Reason
             </label>
             <select
               required
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full rounded-lg bg-secondary px-3 py-2 text-white outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full rounded-lg bg-secondary px-3 py-2 outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="" disabled>
                 Select a reason
@@ -94,7 +94,7 @@ const ReportArtworkModal = ({
 
           {/* Description */}
           <div>
-            <label className="mb-1 block text-sm text-zinc-300">
+            <label className="mb-1 block text-sm ">
               Description
             </label>
             <textarea
@@ -102,7 +102,7 @@ const ReportArtworkModal = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide more details about the report..."
-              className="h-28 w-full resize-none rounded-lg bg-secondary px-3 py-2 text-white outline-none focus:ring-2 focus:ring-green-500"
+              className="h-28 w-full resize-none rounded-lg bg-secondary px-3 py-2 outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
 
@@ -111,13 +111,13 @@ const ReportArtworkModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg bg-secondary px-4 py-2 text-sm text-white hover:bg-zinc-600 cursor-pointer"
+              className="rounded-lg bg-secondary px-4 py-2 text-sm hover:bg-zinc-600 cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-500  cursor-pointer"
+              className="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium hover:bg-green-500  cursor-pointer"
             >
               Submit Report
             </button>

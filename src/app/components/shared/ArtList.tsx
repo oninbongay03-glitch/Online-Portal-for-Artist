@@ -11,10 +11,10 @@ export default function ArtList({ art }: { art: artwork }) {
   const user = userProfile.find(
     (u) => u.id === art.user_profile_id
   );
+  
   return (
     <div className="mb-4 w-full break-inside-avoid relative">
       <div className="art-item-wrapper rounded-md overflow-hidden relative group ">
-    
           <Image
             src={art?.art_file}
             alt={art?.artwork_title || "Artwork"}
@@ -59,11 +59,15 @@ export default function ArtList({ art }: { art: artwork }) {
         </section>
       </div>
 
-      <div className="absolute top-2 right-2">
-        <p className="bg-orange-500 py-1 px-2 rounded-full text-xs text-black">
-          {art?.status}
-        </p>
-      </div>
+      {
+        art?.status == "For Sale" && 
+          <div className="absolute top-2 right-2">
+            <p className="bg-orange-500 py-1 px-2 rounded-full text-xs text-black">
+              {art?.status}
+            </p>
+          </div>
+      }
+
     </div>
     </div>
   );

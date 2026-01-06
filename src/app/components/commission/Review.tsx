@@ -1,120 +1,140 @@
-import ProfileIcon from "../ui/ProfileIcon";
+"use client";
+
+import Image from "next/image";
+import { FinalCommissionData } from "@/types/commission";
+import {getGmail} from "@/utils/getUser"
 
 interface Props {
-    formData: any;
-    images: { file: File; url: string }[];
-    goBack: () => void;
+  formData: FinalCommissionData;
+  goBack: () => void;
+  submit: () => FinalCommissionData;
+  userId: string;
 }
 
+const Review = ({ formData, goBack, submit, userId }: Props) => {
+  const { tags } = formData;
+  const images = formData.images ?? [];
 
-const Review = ({
-    formData,
-    images,
-    goBack
-}: Props) => {
-
-const commissionInFo = [
+  const info = [
+    { label: "Art Type", value: formData.artType },
+    { label: "Budget", value: formData.budget },
     {
-      name: "Category",
-      info: formData.tags,
+      label: "Deadline",
+      value: new Date(formData.deadline).toLocaleDateString("en-US"),
     },
-    { name: "Art Type:", info: formData.artType},
-    { name: "Deadline", info: formData.deadline },
-    { name: "Budget", info: "$120" },
   ];
-  return (
-    <div className="max-w-[55em] w-full mx-auto bg-secondary p-4 rounded-md border-primary-line border-1 flex flex-col gap-4">
-      <div className="flex gap-4">
-        <ProfileIcon />
-        <div className="w-full">
-          <div className="flex justify-between items-center ">
-            <h5 className="font-semibold text-md">
-              {" "}
-              <span className="opacity-50 text-xs ml-auto">
-                jeavenanda07@gmail.com
-              </span>
-            </h5>
-            <p className="opacity-50 text-xs ">24 Sept 2025, 02:47</p>
-          </div>
 
-          <p className="opacity-50 text-xs">to ChristianJay69</p>
+  return (
+    <div className="bg-secondary p-6 rounded-md border border-primary-line flex flex-col gap-6">
+      {/* HEADER */}
+      <div className="flex gap-4">
+        <Image 
+          height={40}
+          width={40}
+          alt={`${formData?.commissionFrom?.username}_profile`}
+          src={formData?.commissionFrom?.profile_picture || ""}
+          className="w-12 h-12 object-cover rounded-full"
+        />
+        <div className="flex-1">
+          <div className="flex justify-between">
+            <p className="opacity-70 font-bold">
+              {formData?.commissionFrom?.first_name} {formData.commissionFrom?.last_name}
+              <span className="text-sm ml-4 font-semibold opacity-80">{getGmail(userId).ownerGmail}</span>
+            </p>
+            <p className="text-xs opacity-50">{formData.createdAt}</p>
+          </div>
+          <p className="text-xs opacity-50">
+            to <span className="font-semibold">{formData.commissionTo?.first_name} {formData.commissionTo?.last_name}</span>
+          </p>
         </div>
       </div>
 
       <hr className="border-primary-line" />
 
-      <div className="flex justify-between gap-10">
-        {/* PHOTO REFERENCE */}
-        <div className="w-[40%] flex flex-col gap-4">
-          <h5 className="font-semibold text-lg">
-            Photo Reference <span className="text-xs opacity-50">(3)</span>
-          </h5>
-          <div className="border-1 w-full h-60 bg-secondary overflow-hidden border-primary-line rounded-md">
-            <img
-              src="/"
-              alt="image-reference"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          <div className="flex gap-4">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="border-1 h-25 w-25 bg-secondary border-primary-line rounded-md overflow-hidden"
-              >
-                <img
-                  src="/"
-                  alt="image-reference"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* DETAULS */}
-        <div className="flex-1 flex flex-col gap-4 mt-7">
-          <h3 className="text-3xl font-semibold">{formData?.title}</h3>
-          <p className="font-light">
-            {formData?.description}
+      {/* BODY */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* IMAGES */}
+        <div className="lg:w-[40%] flex flex-col gap-3">
+          <p className="font-semibold">
+            Photo Reference ({images.length})
           </p>
 
-          <ul>
-            {commissionInFo.map((i) => (
-              <li key={i.name} className="font-semibold flex mt-4">
-                <p className="font-semibold mr-5">{i.name}</p>
-                {i.name == "Category" ? (
-                  (i.info || []).map((category: string) => (
-                    <div key={category} className="flex gap-4">
-                      <p key={category} className="font-base">
-                        {category}{" "}
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <span className="">{i.info}</span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="relative h-60 border border-primary-line rounded-md overflow-hidden">
+            {images.length > 0 ? (
+              <Image
+                src={images[0].url}
+                alt="main"
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full text-xs opacity-40">
+                No image
+              </div>
+            )}
+          </div>
+
+          {images.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto">
+              {images.slice(1).map((img, i) => (
+                <div key={i} className="relative h-20 w-20 shrink-0">
+                  <Image
+                    src={img.url}
+                    alt={`thumb-${i}`}
+                    fill
+                    className="object-cover rounded-md border border-primary-line"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* DETAILS */}
+        <div className="flex-1 flex flex-col gap-3">
+          <h3 className="text-2xl font-semibold">{formData.title}</h3>
+          <p className="text-sm opacity-80">{formData.description}</p>
+
+          <div className="flex flex-wrap gap-2">
+            <p><strong>Tags: </strong></p>
+            {tags?.length ? (
+              tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-green-700 text-white px-3 py-1 rounded text-xs"
+                >
+                  {tag}
+                </span>
+              ))
+            ) : (
+              <span className="text-xs opacity-40">No tags</span>
+            )}
+          </div>
+
+          {info.map((item) => (
+            <p key={item.label} className="text-sm">
+              <strong>{item.label}:</strong> {item.value}
+            </p>
+          ))}
         </div>
       </div>
 
-      <div className="fixed -bottom-40 left-0 right-0 h-20 bg-primary z-20 border-t-2 border-primary-line py-4">
-            <div className="max-w-[55em] w-full mx-auto flex justify-between items-center">
-                <p>Please review your commission details</p>
-
-                <div className="flex gap-4">
-                    <button 
-                        onClick={goBack}
-                        type="button" 
-                        className="border-white border-2 py-2 px-10 rounded-md cursor-pointer text-sm transition duration-300 ease-in-out hover:opacity-80 hover:scale-102">Go Back</button>
-                    <button 
-                        type="button" 
-                        className="py-2 px-5 bg-white text-black rounded-md cursor-pointer text-sm transition duration-300 ease-in-out hover:opacity-80 hover:scale-102">Submit Commission</button>
-                </div>
-            </div>
+      {/* FOOTER */}
+      <div className="flex justify-between items-center border-t border-primary-line pt-4">
+        <p className="text-sm opacity-70">
+          Please review your commission details
+        </p>
+        <div className="flex gap-3">
+          <button onClick={goBack} className="border px-6 py-2 rounded-md text-sm cursor-pointer hover:opacity-80 transition-all">
+            Go Back
+          </button>
+          <button
+            onClick={submit}
+            className="bg-white text-black px-6 py-2 rounded-md text-sm font-semibold cursor-pointer hover:opacity-80 transition-all"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
