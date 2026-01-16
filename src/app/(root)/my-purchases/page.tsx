@@ -8,13 +8,13 @@ import { MdOutlineFileDownload } from "react-icons/md";
 
 const page = () => {
     return (
-        <div className="max-w-screen-xl mx-auto p-6 text-white min-h-screen">
+        <div className="max-w-screen-xl mx-auto p-6  min-h-screen">
             <p className="font-bold text-2xl">My Purchases</p>
             <p>View all purchases artworks and commissions</p>
 
             <div className="flex justify-between mt-8 mb-4 gap-4">
 
-                <div className="border-l-3 border-indigo-500 shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
+                <div className="border-l-3 border-indigo-500 bg-primary shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
                     <div className="flex gap-2 items-center">
                         <LuShoppingBag className="w-5 h-5 rounded-md bg-[#29AB87] p-1" />
                         <p className="text-lg font-bold">
@@ -26,7 +26,7 @@ const page = () => {
                     </p>
                 </div>
 
-                <div className="border-l-3 border-indigo-500 shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
+                <div className="border-l-3 border-indigo-500 bg-primary shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
                     <div className="flex gap-2 items-center">
                         <LuShoppingBag className="w-5 h-5 rounded-md bg-[#29AB87] p-1" />
                         <p className="text-lg font-bold">
@@ -38,7 +38,7 @@ const page = () => {
                     </p>
                 </div>
 
-                <div className="border-l-3 border-indigo-500 shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
+                <div className="border-l-3 border-indigo-500 bg-primary  shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
                     <div className="flex gap-2 items-center">
                         <LuShoppingBag className="w-5 h-5 rounded-md bg-[#29AB87] p-1" />
                         <p className="text-lg font-bold">
@@ -50,7 +50,7 @@ const page = () => {
                     </p>
                 </div>
 
-                <div className="border-l-3 border-indigo-500 shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
+                <div className="border-l-3 border-indigo-500 bg-primary  shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
                     <div className="flex gap-2 items-center">
                         <LuShoppingBag className="w-5 h-5 rounded-md bg-[#29AB87] p-1" />
                         <p className="text-lg font-bold">
@@ -62,7 +62,7 @@ const page = () => {
                     </p>
                 </div>
 
-                <div className="border-l-3 border-indigo-500 shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
+                <div className="border-l-3 border-indigo-500 bg-primary  shadow-md shadow-indigo-500/25  border-l-indigo-500 p-3 rounded-lg w-full gap-2">
                     <div className="flex gap-2 items-center">
                         <LuShoppingBag className="w-5 h-5 rounded-md bg-[#29AB87] p-1" />
                         <p className="text-lg font-bold">
@@ -82,12 +82,12 @@ const page = () => {
                     <input
                         type="text"
                         placeholder="Search by artwork name, artwork, or order ID..."
-                        className="pl-12 py-3 w-full text-white rounded-lg border border-gray-700 placeholder-gray-500"
+                        className="pl-12 py-3 w-full  rounded-lg border border-gray-700 placeholder-gray-500"
                     />
                     <CiSearch className="absolute top-3.5 left-4 text-gray-400 text-xl" />
                 </div>
 
-                <div className="w-45 pl-1 py-3 text-white rounded-lg border border-gray-700">
+                <div className="w-45 pl-1 py-3 rounded-lg border border-gray-700">
                     <select className="opacity-50 font-thin outline-none" name="All types" id="all types">
                         <option value="all types">All types</option>
                         <option value="shop">Shop</option>
@@ -95,7 +95,7 @@ const page = () => {
                     </select>
                 </div>
 
-                <div className="w-45 pl-1 py-3 text-white rounded-lg border border-gray-700">
+                <div className="w-45 pl-1 py-3 rounded-lg bg border border-gray-700">
                     <select className="opacity-50 font-thin outline-none" name="All Delivery" id="all delivery">
                         <option value="all delivery">All Delivery</option>
                         <option value="digital">Digital</option>
@@ -103,7 +103,7 @@ const page = () => {
                     </select>
                 </div>
 
-                <div className="w-45 pl-1 py-3 text-white rounded-lg border border-gray-700 placeholder-gray-500">
+                <div className="w-45 pl-1 py-3 rounded-lg border border-gray-700 placeholder-gray-500">
                     <select className="opacity-50 font-thin outline-none" name="All Status" id="all status">
                         <option value="all status">All Status</option>
                         <option value="paid">Paid</option>
@@ -118,7 +118,7 @@ const page = () => {
 
             <div className="mt-8">
                 <div className="flex justify-between gap-4">
-                    <div className="rounded-[10px] border-t-4 border-[#00FF6A] shadow-xs shadow-gray-700 p-4 w-[50%]">
+                    <div className="rounded-[10px] border-t-4 bg-primary  border-[#00FF6A] shadow-xs shadow-gray-700 p-4 w-[50%]">
 
                         <div className="flex gap-2">
                             <img src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="dispaly picture" className="w-13 h-13 rounded-full mt-1" />
@@ -178,7 +178,7 @@ const page = () => {
                     </div>
 
 
-                    <div className="rounded-[10px] border-t-4 border-[#00FF6A] shadow-xs shadow-gray-700 p-4 w-[50%]">
+                    <div className="rounded-[10px] border-t-4 bg-primary  border-[#00FF6A] shadow-xs shadow-gray-700 p-4 w-[50%]">
 
                         <div className="flex gap-2">
                             <img src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="dispaly picture" className="w-13 h-13 rounded-full mt-1" />

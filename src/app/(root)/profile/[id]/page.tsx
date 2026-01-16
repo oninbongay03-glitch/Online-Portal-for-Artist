@@ -62,40 +62,52 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       </div>
 
     </div>
-      <div><h2>About ChristianJay69</h2>
-        <div className="bg-primary h-135 w-130 mt-14 rounded-sm "> 
-          <div className="flex gap-2 m-2 p-5">
-            <HiOutlineCake className=" h-10 w-10" />
-            <div><h2>Birthday: MM/DD/YYYY</h2></div>
-          </div>
-          <div className="flex align-middle gap-2 m-2 p-5">
-            <CiLocationOn className="h-10 w-10"/>
-            <div><h2>Location: Philippines</h2></div>
-          </div>
-          <div className="flex gap-2 m-2 p-5">
-            <CgProfile className="h-10 w-10"/>
-            <div><h2>Joined : 5months ago</h2></div>
-          </div>
-          <div className="flex gap-2 m-2 p-5" >
-            <SlActionRedo className="h-10 w-10"/>
-            <div><h2>Pronoun: He/Him</h2></div>
-          </div>
-          <div className="flex gap-2 m-2 p-5">
-            <RiBallPenLine className="h-10 w-10"/>
-            <div><h2>Bio: I’m a digital artist who creates vibrant <br /> character illustrations inspired by fantasy. I <br /> love bringing ideas to life through bold <br /> colors and dynamic designs.</h2></div>
-          </div>
-        </div>
+      
+      
+    <div className="w-130 flex flex-col gap-6">
+        
+        {/* About Section */}
         <div>
-          <div>
-            <div>
-              <div className="bg-primary h-135 w-130 mt-14 rounded-sm ">
-                <div className="flex"><img src="https://www.imdb.com/name/nm0246703/mediaviewer/rm2328975361/?ref_=nm_ph_2" alt="" /></div>
-                <div className="">Add a new comment...</div>
-              </div>
-              <div></div>
-              <div></div>
+          <h2 className="text-xl font-bold text-white">
+            About {"User"}
+          </h2>
+
+          <div className="bg-primary rounded-sm p-5 mt-4 space-y-3 text-sm">
+            <div className="flex items-center gap-2">
+              <HiOutlineCake className="h-6 w-6" />
+              <span>Birthday: {"MM/DD/YYYY"}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <CiLocationOn className="h-6 w-6" />
+              <span>Location: {"Philippines"}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <CgProfile className="h-6 w-6" />
+              <span>Joined: {"5 months ago"}</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <SlActionRedo className="h-6 w-6" />
+              <span>Pronouns: {"He/Him"}</span>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <RiBallPenLine className="h-6 w-6" />
+              <span className="leading-tight">
+               
+                  "I’m a digital artist who creates vibrant character illustrations inspired by fantasy. I love bringing ideas to life through bold colors and dynamic designs."
+              </span>
             </div>
           </div>
+        </div>
+
+        {/* Comments Section */}
+      
+        <div className="bg-primary rounded-sm p-5 mt-4 space-y-3 text-sm">
+          <span className="text-sm font-semibold text-white"></span>
+          {/* <ProfileComments /> */}
         </div>
       </div>
     </div>

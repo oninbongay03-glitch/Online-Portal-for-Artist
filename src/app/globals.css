@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+html{
+  scroll-behavior: smooth !important;
+}
+
 /* ============================= */
 /* Base Theme Tokens (LIGHT)     */
 /* ============================= */
+
 :root {
   --background: #ffffff;
   --foreground: #000000;

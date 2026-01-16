@@ -2,13 +2,9 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
+import {ModalProps} from "@/types/modal"
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  className?: string;
-}
+
 
 const Modal = ({ isOpen, onClose, children, className }: ModalProps) => {
   if (!isOpen) return null;

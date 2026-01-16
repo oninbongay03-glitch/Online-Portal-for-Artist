@@ -1,10 +1,16 @@
+'use client';
+
 import React from 'react'
+import { useState } from "react";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { CiImageOn } from "react-icons/ci";
+import Modal from '../../ui/Modal';
+import {ModalProps} from "@/types/modal"
 
-const Checkout = () => {
+const Checkout = ({isOpen, onClose, className}: ModalProps) => {
+    
   return (
-    <div>
+    <Modal isOpen={isOpen} onClose={onClose} className="max-w-[1280px] w-full  flex flex-col">
       <div>
         <div className="flex items-center gap-1 cursor-pointer max-w-screen-xl mx-auto translate-x-[14.7em]">
          <MdOutlineKeyboardArrowLeft className="text-sm" />
@@ -81,7 +87,7 @@ const Checkout = () => {
       </div>
     </div>
 
-  </div>
+  </Modal>
   )
 }
 

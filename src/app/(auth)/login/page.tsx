@@ -7,8 +7,6 @@ import { CiLock } from "react-icons/ci";
 import Logo from "@/app/components/ui/Logo";
 import {login} from "@/lib/actions/auth"
 
-
-
 export default function LoginPage() {
   return (
     <div className="w-full relative shadow-xl min-h-[100dvh] border-white border-2 shadow-white flex flex-col justify-center items-center h-[100dvh] bg-[url('https://static.vecteezy.com/system/resources/previews/006/595/713/non_2x/silhouettes-of-panoramic-mountains-view-landscape-vector.jpg')] bg-cover bg-center h-64 w-full)">

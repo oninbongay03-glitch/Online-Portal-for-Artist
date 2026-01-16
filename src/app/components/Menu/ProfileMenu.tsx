@@ -82,7 +82,8 @@ const ProfileMenu = ({ handleLogOut }: ProfileMenuProps) => {
 
         {/* Menu */}
         <div className="w-full border-t border-primary-line px-2 pt-2 text-base">
-
+          <p><Link href="/checkout" className="px-4 py-2 my-4 font-semibold">Checkout</Link></p>
+          <p><Link href="/my-purchases" className="px-4 py-2 my-2 font-semibold">My Purchases</Link></p>
           {/* Theme Toggle */}
           <div className="flex items-center justify-between rounded-sm px-4 py-2 transition hover:bg-secondary">
             <span className="font-semibold">Theme</span>
@@ -101,6 +102,8 @@ const ProfileMenu = ({ handleLogOut }: ProfileMenuProps) => {
               >
                 🌙
               </button>
+
+             
 
               {/* Light */}
               <button
