@@ -76,7 +76,7 @@ export default function LoginPage() {
             </div>
 
             <button
-              className="border p-5 bg-gradient-primary  rounded-xl"
+              className="border p-5 bg-blue-500  rounded-xl"
               type="submit"
             >
               <Link href="/register/profile-setup">Sign up</Link>

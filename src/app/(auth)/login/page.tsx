@@ -1,13 +1,40 @@
-// src/app/login/page.tsx
 'use client'
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { TfiEmail } from "react-icons/tfi";
 import { CiLock } from "react-icons/ci";
 import Logo from "@/app/components/ui/Logo";
-import {login} from "@/lib/actions/auth"
+import {login} from "@/lib/actions/auth";
+import {validateAll} from "@/utils/validator"
+import {loginPatterns} from "@/utils/patterns";
 
 export default function LoginPage() {
+  let isRememberMe = document.querySelector('#remember') as HTMLInputElement | null;
+  const handleSubmit = (e: Event) => {
+    e.preventDefault();
+
+    const {gmail, password, isRememberMe} = e.target as typeof e.target & {
+      gmail: {value: string};
+      password: {value: string};
+      isRememberMe: {value: boolean};
+    };
+
+    const formData = {
+      gmail: gmail.value,
+      password: password.value,
+      isRememberMe: isRememberMe.value,
+    };
+
+    const errors = validateAll(formData, loginPatterns);
+
+    if (Object.keys(errors).length > 0) {
+      console.log("Validation errors:", errors);
+      return;
+    } else {
+      console.log("Form data is valid. Submitting...")
+    }
+  }
+
   return (
     <div className="w-full relative shadow-xl min-h-[100dvh] border-white border-2 shadow-white flex flex-col justify-center items-center h-[100dvh] bg-[url('https://static.vecteezy.com/system/resources/previews/006/595/713/non_2x/silhouettes-of-panoramic-mountains-view-landscape-vector.jpg')] bg-cover bg-center h-64 w-full)">
         <div className="z-20 flex justify-center  h-[40em] rounded-md overflow-hidden">
@@ -17,7 +44,7 @@ export default function LoginPage() {
           </div>
 
           <div className="w-[90dvw] md:w-1/2 bg-white py-10">
-            <form className="flex flex-col gap-5 p-10">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-10" id="login-form">
               <h3 className="text-3xl font-bold text-center text-black">Welcome back</h3>
               <button onClick={() => login()} className="border border-cyan-500 p-5 text-black rounded-xl flex items-center justify-center gap-3">
                 <FcGoogle />
@@ -32,23 +59,23 @@ export default function LoginPage() {
               
               <div className="relative w-full">
                 <TfiEmail className="absolute left-4 top-6 text-2xl text-gray-500"/>
-                <input className="flex border border-cyan-500 p-5 pl-14 w-full rounded-lg text-black outline-none" type="email" placeholder="Email" />
+                <input name="gmail" id="gmail" className="flex border border-cyan-500 p-5 pl-14 w-full rounded-lg text-black outline-none" type="email" placeholder="Email" />
               </div>
               
               <div className="relative w-full">
                 <CiLock className="absolute left-4 top-6 text-2xl text-gray-700"/>
-                <input className="flex border border-cyan-500 p-5 pl-14 w-full rounded-lg text-black outline-none" type="password" placeholder="Password" />
+                <input name="password" id="password" className="flex border border-cyan-500 p-5 pl-14 w-full rounded-lg text-black outline-none" type="password" placeholder="Password" />
               </div>
 
               <div className="flex justify-between">
                 <div>
-                  <input type="checkbox" id="remember"/>
+                  <input name="isRememberMe" type="checkbox" id="remember"/>
                   <label className="text-black" htmlFor="remember"> Remember me</label>
                 </div>
                 <a className="text-blue-600" href="#">Forgot Password?</a>
               </div>
 
-              <button className="border p-5 bg-gradient-primary  rounded-xl" type="submit">Login</button>
+              <button className="border p-5 bg-blue-500  rounded-xl" type="submit">Login</button>
               <p className="text-center text-black">Don't have an account? <Link className="text-blue-600" href="/register">Create an account</Link></p>
             </form>
           </div>
